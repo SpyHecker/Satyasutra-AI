@@ -36,6 +36,16 @@ export const api = {
       return request('/evidence/upload', { method: 'POST', body: form });
     },
     list: () => request('/evidence/'),
+    get: (id) => request(`/evidence/${id}`),
+    delete: (id) => request(`/evidence/${id}`, { method: 'DELETE' }),
+  },
+
+  analysis: {
+    graph: () => request('/evidence/analysis/graph'),
+    timeline: () => request('/evidence/analysis/timeline'),
+    contradictions: () => request('/evidence/analysis/contradictions'),
+    report: () => request('/evidence/analysis/report'),
+    stats: () => request('/evidence/analysis/stats'),
   },
 };
 

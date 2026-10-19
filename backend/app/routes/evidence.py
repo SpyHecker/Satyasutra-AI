@@ -1,7 +1,6 @@
 """
-Evidence routes — handles evidence file upload, retrieval, and deletion.
-
-Week 2: Full pipeline — upload → save → OCR → NLP → persist → return entities.
+Evidence routes — handles evidence file upload, retrieval, deletion,
+and the full analysis pipeline (graph, timeline, contradictions, report).
 """
 
 import os
@@ -14,6 +13,16 @@ from pydantic import BaseModel
 from app.services.ocr import extract_text, get_file_type, is_supported
 from app.services.nlp_extraction import extract_entities, get_entity_summary
 from app.services.evidence_store import store, EvidenceRecord, EntityRecord
+from app.services.graph_builder import (
+    add_evidence_to_graph,
+    rebuild_case_graph,
+    graph_to_json,
+    get_case_graph,
+    reset_case_graph,
+)
+from app.services.timeline import build_timeline, detect_gaps
+from app.services.contradiction_detector import detect_contradictions
+from app.services.report_generator import generate_report
 
 logger = logging.getLogger(__name__)
 
@@ -151,6 +160,12 @@ async def upload_evidence(file: UploadFile = File(...)):
     )
     store.save(record)
 
+    # Add to case graph
+    try:
+        add_evidence_to_graph(entities_raw, record.id)
+    except Exception as e:
+        logger.warning(f"Graph update failed: {e}")
+
     # Build response
     text_preview = raw_text[:500] + ("..." if len(raw_text) > 500 else "")
 
@@ -234,4 +249,139 @@ async def delete_evidence(evidence_id: str):
 
     # Delete from store
     store.delete(evidence_id)
+
+    # Rebuild graph without deleted evidence
+    try:
+        remaining = store.list_all()
+        rebuild_case_graph(remaining)
+    except Exception as e:
+        logger.warning(f"Graph rebuild after deletion failed: {e}")
+
     return {"message": f"Evidence '{record.filename}' deleted", "id": evidence_id}
+
+
+# ---------------------------------------------------------------------------
+# GET /analysis/graph — get the full case knowledge graph
+# ---------------------------------------------------------------------------
+@router.get("/analysis/graph")
+async def get_graph():
+    """Return the full case knowledge graph as JSON for visualization."""
+    records = store.list_all()
+    if not records:
+        return {
+            "nodes": [],
+            "links": [],
+            "stats": {"total_nodes": 0, "total_edges": 0, "categories": {}},
+        }
+    graph_json = rebuild_case_graph(records)
+    return graph_json
+
+
+# ---------------------------------------------------------------------------
+# GET /analysis/timeline — get the reconstructed timeline
+# ---------------------------------------------------------------------------
+@router.get("/analysis/timeline")
+async def get_timeline():
+    """Return the reconstructed timeline with gap detection."""
+    records = store.list_all()
+    if not records:
+        return {"events": [], "gaps": [], "total_events": 0, "total_gaps": 0}
+
+    timeline = build_timeline(records)
+    gaps = detect_gaps(timeline, max_gap_hours=6.0)
+
+    return {
+        "events": timeline,
+        "gaps": gaps,
+        "total_events": len(timeline),
+        "total_gaps": len(gaps),
+    }
+
+
+# ---------------------------------------------------------------------------
+# GET /analysis/contradictions — detect contradictions across evidence
+# ---------------------------------------------------------------------------
+@router.get("/analysis/contradictions")
+async def get_contradictions():
+    """Detect and return contradictions found across evidence sources."""
+    records = store.list_all()
+    if not records:
+        return {"contradictions": [], "total": 0}
+
+    contradictions = detect_contradictions(records)
+
+    return {
+        "contradictions": contradictions,
+        "total": len(contradictions),
+    }
+
+
+# ---------------------------------------------------------------------------
+# GET /analysis/report — generate the full case report
+# ---------------------------------------------------------------------------
+@router.get("/analysis/report")
+async def get_report():
+    """Generate and return a full case investigation report."""
+    records = store.list_all()
+
+    # Build all analysis components
+    graph_json = rebuild_case_graph(records) if records else {
+        "nodes": [], "links": [],
+        "stats": {"total_nodes": 0, "total_edges": 0, "categories": {}},
+    }
+    timeline = build_timeline(records) if records else []
+    gaps = detect_gaps(timeline, max_gap_hours=6.0) if timeline else []
+    contradictions = detect_contradictions(records) if records else []
+
+    # Prepare evidence metadata for the report
+    evidence_meta = [
+        {
+            "id": r.id,
+            "filename": r.filename,
+            "file_type": r.file_type,
+            "status": r.status,
+            "entity_count": len(r.entities),
+        }
+        for r in records
+    ]
+
+    case_data = {
+        "evidence": evidence_meta,
+        "graph": graph_json,
+        "timeline": timeline,
+        "timeline_gaps": gaps,
+        "contradictions": contradictions,
+    }
+
+    report = generate_report(case_data)
+    return report
+
+
+# ---------------------------------------------------------------------------
+# GET /analysis/stats — get dashboard statistics
+# ---------------------------------------------------------------------------
+@router.get("/analysis/stats")
+async def get_stats():
+    """Return aggregated statistics for the dashboard."""
+    records = store.list_all()
+
+    total_entities = sum(len(r.entities) for r in records)
+
+    # Get category breakdown
+    category_counts: dict[str, int] = {}
+    for r in records:
+        for e in r.entities:
+            cat = e.category
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+
+    # Count contradictions
+    contradictions = detect_contradictions(records) if len(records) >= 2 else []
+
+    return {
+        "evidence_count": len(records),
+        "total_entities": total_entities,
+        "entity_categories": category_counts,
+        "contradiction_count": len(contradictions),
+        "processed_count": sum(1 for r in records if r.status == "processed"),
+        "failed_count": sum(1 for r in records if r.status == "extraction_failed"),
+    }

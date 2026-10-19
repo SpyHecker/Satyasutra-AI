@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import api from '../api/client';
 
 const features = [
   {
@@ -45,14 +47,45 @@ const features = [
   },
 ];
 
-const stats = [
-  { value: '6', label: 'Modules' },
-  { value: '8', label: 'Week Plan' },
-  { value: '5', label: 'MVP Features' },
-  { value: '∞', label: 'Evidence' },
-];
-
 export default function Dashboard() {
+  const [stats, setStats] = useState(null);
+  const [backendOnline, setBackendOnline] = useState(null);
+
+  useEffect(() => {
+    // Check backend health
+    api.health()
+      .then(() => setBackendOnline(true))
+      .catch(() => setBackendOnline(false));
+
+    // Fetch stats
+    api.analysis.stats()
+      .then((data) => setStats(data))
+      .catch(() => setStats(null));
+  }, []);
+
+  const liveStats = [
+    {
+      value: stats?.evidence_count ?? '—',
+      label: 'Evidence',
+      color: stats?.evidence_count > 0 ? 'var(--accent-light)' : 'var(--text-muted)',
+    },
+    {
+      value: stats?.total_entities ?? '—',
+      label: 'Entities',
+      color: stats?.total_entities > 0 ? 'var(--success)' : 'var(--text-muted)',
+    },
+    {
+      value: stats?.contradiction_count ?? '—',
+      label: 'Contradictions',
+      color: stats?.contradiction_count > 0 ? 'var(--danger)' : 'var(--text-muted)',
+    },
+    {
+      value: backendOnline === true ? '●' : backendOnline === false ? '○' : '…',
+      label: 'Backend',
+      color: backendOnline ? 'var(--success)' : 'var(--danger)',
+    },
+  ];
+
   return (
     <div className="anim-fade">
       {/* Hero */}
@@ -79,11 +112,11 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        {/* Stats */}
+        {/* Live Stats */}
         <div className="stats-bar anim-fade-up delay-4">
-          {stats.map((s) => (
+          {liveStats.map((s) => (
             <div className="stat-item" key={s.label}>
-              <span className="stat-value">{s.value}</span>
+              <span className="stat-value" style={{ color: s.color }}>{s.value}</span>
               <span className="stat-label">{s.label}</span>
             </div>
           ))}
@@ -99,7 +132,7 @@ export default function Dashboard() {
         </h2>
         <div className="grid grid-3">
           {features.map((f, i) => (
-            <Link to={f.to} className="card card-link anim-fade-up delay-{i+1}" key={f.title}
+            <Link to={f.to} className="card card-link anim-fade-up" key={f.title}
                   style={{ animationDelay: `${0.07 * (i + 5)}s`, opacity: 0 }}
             >
               <div className="card-icon">{f.icon}</div>
