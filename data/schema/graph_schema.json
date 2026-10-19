@@ -1,0 +1,76 @@
+{
+  "node_types": {
+    "Person": {
+      "description": "An individual mentioned in or relevant to the case.",
+      "properties": ["name", "aliases", "role", "description", "age", "gender"]
+    },
+    "Location": {
+      "description": "A physical place referenced in evidence.",
+      "properties": ["name", "address", "coordinates", "type"]
+    },
+    "Event": {
+      "description": "A discrete occurrence with a timestamp.",
+      "properties": ["description", "timestamp", "duration", "type"]
+    },
+    "Object": {
+      "description": "A physical item of evidentiary relevance.",
+      "properties": ["name", "type", "description", "serial_number"]
+    },
+    "Document": {
+      "description": "An uploaded evidence file (text, image, scan).",
+      "properties": ["title", "source", "file_path", "upload_date", "ocr_text"]
+    },
+    "Statement": {
+      "description": "A specific claim or account made by a person.",
+      "properties": ["speaker", "content", "date", "source_document_id"]
+    }
+  },
+  "edge_types": {
+    "PARTICIPATED_IN": {
+      "description": "A person participated in an event.",
+      "from": "Person",
+      "to": "Event",
+      "properties": ["role", "evidence_id"]
+    },
+    "LOCATED_AT": {
+      "description": "An event took place at a location.",
+      "from": "Event",
+      "to": "Location",
+      "properties": ["evidence_id"]
+    },
+    "MENTIONED_IN": {
+      "description": "A person or object is mentioned in a document.",
+      "from": ["Person", "Object"],
+      "to": "Document",
+      "properties": ["context", "evidence_id"]
+    },
+    "OWNS": {
+      "description": "A person owns or possesses an object.",
+      "from": "Person",
+      "to": "Object",
+      "properties": ["evidence_id"]
+    },
+    "RELATED_TO": {
+      "description": "A general relationship between two entities.",
+      "from": "Entity",
+      "to": "Entity",
+      "properties": ["relation_type", "confidence", "evidence_id"]
+    },
+    "CONTRADICTS": {
+      "description": "Two statements contain conflicting facts.",
+      "from": "Statement",
+      "to": "Statement",
+      "properties": ["explanation", "evidence_ids"]
+    },
+    "EXTRACTED_FROM": {
+      "description": "An entity was extracted from a document by the NLP pipeline.",
+      "from": "Entity",
+      "to": "Document",
+      "properties": ["extraction_method", "confidence"]
+    }
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "SatyaSutra investigation knowledge graph schema. Every edge carries an evidence_id to maintain full provenance and auditability."
+  }
+}

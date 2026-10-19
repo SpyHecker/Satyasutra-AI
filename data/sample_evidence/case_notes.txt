@@ -1,0 +1,59 @@
+INVESTIGATOR CASE NOTES
+
+Case No.: 142/2026
+Officer: SI Meera Joshi
+Date: 18-July-2026
+
+---
+
+SUMMARY OF CASE:
+
+Burglary at Verma Electronics, 45 FC Road, Deccan, Pune. Complainant Rajesh Kumar Verma reports theft of 3 laptops, 5 mobile phones, Rs. 85,000 cash, and CCTV recording equipment between 12:00 AM and 8:30 AM on 15-July-2026.
+
+KEY PERSONS OF INTEREST:
+
+1. Vikram Deshmukh (age 28) — Former employee of Verma Electronics. Terminated on 01-June-2026 for cash handling irregularities. Had detailed knowledge of shop layout, CCTV system, and cash storage. Last known address: 112, Karve Nagar, Pune - 411052.
+
+2. Unknown Male 1 — Described as tall (~5'10"), wearing dark blue jacket. Seen by witness Sunil Patil near the rear alley at ~10:45 PM on 14-July-2026.
+
+3. Unknown Male 2 — Described as shorter (~5'5"), wearing black hoodie. Seen with Unknown Male 1.
+
+4. Possible Unknown Male 3 — Second witness Priya Sharma reports seeing THREE men, not two. Third man described as a lookout using a mobile phone.
+
+KEY EVIDENCE:
+
+- Broken rear door lock at the shop (photographed, sent to forensics)
+- Partial vehicle plate: MH-12 XX 7856 (Sunil Patil provided full partial plate)
+- CCTV hard drive unit was deliberately removed — indicates insider knowledge
+- No fingerprints recovered from rear door (wiped clean)
+
+TIMELINE DISCREPANCIES:
+
+- Sunil Patil (Witness 1) places the van at ~10:45 PM and leaves at ~11:00 PM
+- Priya Sharma (Witness 2) hears sounds at ~12:30 AM and sees men leave at ~1:10 AM
+- Gap of approximately 1.5 hours between last sighting by Witness 1 and first observation by Witness 2
+- FIR states shop was locked at ~12:00 AM midnight — break-in must have occurred AFTER this time
+- This aligns more closely with Witness 2's timeline than Witness 1's
+
+CONTRADICTIONS NOTED:
+
+1. Vehicle color: Witness 1 says WHITE van; Witness 2 says DARK (grey/black) van
+   - Note: Poor alley lighting could explain color discrepancy
+   - Need to check street light status for that night
+
+2. Number of suspects: Witness 1 saw TWO men; Witness 2 saw THREE men
+   - Third man may have arrived later or was inside the van when Witness 1 observed
+
+3. Vehicle identification: Complainant says "partial plate MH-12 XX 78__"; Witness 1 provides "MH-12 XX 7856"
+   - Need RTO records check for MH-12 XX 7856
+
+NEXT STEPS:
+
+- [ ] Run RTO check on plate MH-12 XX 7856
+- [ ] Visit Vikram Deshmukh at Karve Nagar address
+- [ ] Check street light maintenance records for FC Road rear alley
+- [ ] Canvas additional shops on FC Road for CCTV footage
+- [ ] Request call records for Vikram Deshmukh's known phone numbers
+- [ ] Send door lock fragments for tool mark analysis
+
+Status: UNDER INVESTIGATION
