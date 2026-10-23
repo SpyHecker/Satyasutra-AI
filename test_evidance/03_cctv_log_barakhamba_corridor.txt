@@ -1,0 +1,18 @@
+METROPOLITAN SURVEILLANCE & ANPR LOG ANALYSIS
+Department of Video Analytics & Digital Forensics, Delhi Police
+Case Reference: FIR No. 204/2026
+Date of Compilation: October 22, 2026 at 01:15 PM
+Lead Analyst: Sub-Inspector Tanvi Saxena
+
+SURVEILLANCE EVENT TIMELINE:
+1. October 21, 2026 at 10:45 PM [Camera #08 - Barakhamba Commercial Lane]:
+   A black sedan registration DL 03 CA 9412 arrives and halts 150 meters from Connaught Bank. Vehicle is registered to suspect Vikram Malhotra, Chief Systems Architect at Apex Global Securities.
+
+2. October 21, 2026 at 11:20 PM [Camera #14 - South Alley Perimeter]:
+   A lone individual matching physical dimensions of Vikram Malhotra approaches the biometric emergency fire door holding an encrypted NFC badge.
+
+3. October 21, 2026 at 11:45 PM [Camera #03 - Loading Bay Gate 3]:
+   A white van registration DL 01 TE 5521 backs into the cargo bay. Two men are recorded loading two containers into the white van while the individual inside the vault facility observes.
+
+4. October 22, 2026 at 12:30 AM [Toll ANPR #04 - DND Flyway Toll Plaza]:
+   Vehicle DL 03 CA 9412 registered to Vikram Malhotra recorded crossing lane 6 towards Noida Sector 62 at 112 km/h. Driver face positively matched with Vikram Malhotra database photo.
