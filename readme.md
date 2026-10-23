@@ -38,11 +38,14 @@
 
 | Layer | Technology |
 |---|---|
-| Frontend | React |
-| Backend / API | Flask / FastAPI |
-| OCR + NLP Pipeline | Tesseract OCR, spaCy |
-| Graph Database | Neo4j / NetworkX |
+| Frontend | React 19, Vite, React Router 7 |
+| Backend / API | FastAPI, Uvicorn |
+| Database | MongoDB (`MONGODB_URL`) with local fallback |
+| Authentication | JWT (HS256) + bcrypt password hashing |
+| OCR + NLP Pipeline | Tesseract OCR, spaCy, PyMuPDF |
+| Graph Database | NetworkX / Neo4j |
 | Deployment | Render / AWS |
+
 
 ## Project Structure
 

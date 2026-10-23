@@ -33,3 +33,8 @@ uploads/
 
 # Neo4j
 data/neo4j/
+
+# Local database store files
+backend/data/*.json
+data/*.json
+

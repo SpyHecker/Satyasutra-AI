@@ -2,7 +2,8 @@
 SatyaSutra Backend — FastAPI Application
 
 Main entry point. Configures CORS, registers routes, and exposes a
-health-check endpoint. Creates required directories on startup.
+health-check endpoint. Creates required directories and initializes
+MongoDB connection on startup.
 """
 
 import os
@@ -15,6 +16,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.evidence import router as evidence_router
+from app.routes.auth import router as auth_router
+from app.db.mongodb import (
+    connect_to_mongodb,
+    close_mongodb_connection,
+    is_mongodb_ready,
+    get_mongodb_db_name,
+)
 
 load_dotenv()
 
@@ -33,12 +41,22 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Create required directories on startup."""
+    """Create required directories and initialize database on startup."""
     dirs = [Path("uploads"), Path("data")]
     for d in dirs:
         d.mkdir(parents=True, exist_ok=True)
         logger.info(f"Ensured directory: {d.resolve()}")
+
+    # Initialize MongoDB connection if configured
+    mongo_ok = connect_to_mongodb()
+    if mongo_ok:
+        logger.info(f"Active database backend: MongoDB ({get_mongodb_db_name()})")
+    else:
+        logger.info("Active database backend: Local JSON Store (ready for MongoDB connection)")
+
     yield
+
+    close_mongodb_connection()
     logger.info("Shutting down SatyaSutra API")
 
 
@@ -53,13 +71,15 @@ app = FastAPI(
 )
 
 # ---------------------------------------------------------------------------
-# CORS — allow the Vite dev server during development
+# CORS — allow Vite dev server during development
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -69,6 +89,7 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Routers
 # ---------------------------------------------------------------------------
+app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(evidence_router, prefix="/api/evidence", tags=["Evidence"])
 
 
@@ -77,8 +98,18 @@ app.include_router(evidence_router, prefix="/api/evidence", tags=["Evidence"])
 # ---------------------------------------------------------------------------
 @app.get("/api/health", tags=["System"])
 async def health_check():
-    """Simple liveness probe."""
-    return {"status": "ok"}
+    """Liveness & database readiness probe."""
+    mongo_ready = is_mongodb_ready()
+    return {
+        "status": "ok",
+        "service": "SatyaSutra AI Forensic API",
+        "version": "0.2.0",
+        "database": {
+            "type": "mongodb" if mongo_ready else "local_fallback",
+            "mongodb_connected": mongo_ready,
+            "database_name": get_mongodb_db_name() if mongo_ready else "local_json",
+        },
+    }
 
 
 # ---------------------------------------------------------------------------
