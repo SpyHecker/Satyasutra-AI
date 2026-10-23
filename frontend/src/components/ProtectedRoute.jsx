@@ -30,10 +30,7 @@ export default function ProtectedRoute({ children }) {
 
           <div className="auth-gate-actions">
             <Link to="/login" className="btn btn-primary gate-btn">
-              🔑 Sign In to Case Vault
-            </Link>
-            <Link to="/register" className="btn btn-ghost gate-btn">
-              Create New Investigator Account →
+              🔑 Sign In to Case Vault →
             </Link>
           </div>
 

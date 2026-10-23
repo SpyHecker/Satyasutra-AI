@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,7 +10,6 @@ import GraphView from './pages/GraphView';
 import Timeline from './pages/Timeline';
 import Report from './pages/Report';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import './App.css';
 
 export default function App() {
@@ -21,10 +20,10 @@ export default function App() {
           <Navbar />
           <main className="app-main">
             <Routes>
-              {/* Public Landing & Authentication */}
+              {/* Public Landing & Single Authentication Portal */}
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Navigate to="/login" replace />} />
 
               {/* Protected Forensic Investigation Workspace */}
               <Route

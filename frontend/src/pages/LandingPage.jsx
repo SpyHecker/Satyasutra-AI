@@ -37,14 +37,9 @@ export default function LandingPage() {
               🚀 Enter Investigation Workspace ({user?.full_name?.split(' ')[0] || 'Investigator'}) →
             </Link>
           ) : (
-            <>
-              <Link to="/register" className="btn btn-primary btn-hero-primary" id="cta-get-started">
-                🛡️ Create Clearance Credentials →
-              </Link>
-              <Link to="/login" className="btn btn-secondary btn-hero-login" id="cta-login">
-                Sign In to Vault
-              </Link>
-            </>
+            <Link to="/login" className="btn btn-primary btn-hero-primary" id="cta-login">
+              🔐 Sign In to Investigation Vault →
+            </Link>
           )}
         </div>
 
@@ -412,14 +407,9 @@ export default function LandingPage() {
             Experience the clarity of AI-assisted evidence linkage. Launch your case dossier in seconds.
           </p>
           <div className="cta-buttons">
-            <Link to={isAuthenticated ? '/dashboard' : '/register'} className="btn btn-primary btn-cta">
-              {isAuthenticated ? 'Open Investigation Dashboard →' : 'Create Clearance Credentials →'}
+            <Link to={isAuthenticated ? '/dashboard' : '/login'} className="btn btn-primary btn-cta">
+              {isAuthenticated ? 'Open Investigation Dashboard →' : 'Sign In to Investigation Vault →'}
             </Link>
-            {!isAuthenticated && (
-              <Link to="/login" className="btn btn-secondary btn-cta">
-                Sign In to Vault
-              </Link>
-            )}
           </div>
         </div>
       </section>

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, dbStatus } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,9 +37,9 @@ export default function Login() {
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-icon-badge">⚖️</div>
-          <h1 className="auth-title">Investigator & Admin Sign In</h1>
+          <h1 className="auth-title">Forensic Portal Sign In</h1>
           <p className="auth-subtitle">
-            Sign in to access your secure case files, knowledge graphs, and forensic reports
+            Enter your credentials to access the SatyaSutra investigation workspace
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Login() {
                 id="login-email"
                 type="email"
                 className="form-input"
-                placeholder="admin@satyasutra.ai or investigator@agency.gov"
+                placeholder="admin@satyasutra.ai"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -114,21 +114,10 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="auth-footer-links">
-          <span>Need an investigator account? </span>
-          <Link to="/register" className="auth-link">
-            Create Clearance Credentials
-          </Link>
+        <div className="db-status-pill">
+          <span className="db-dot online"></span>
+          <span>Database: SQLite Secure Storage</span>
         </div>
-
-        {dbStatus && (
-          <div className="db-status-pill">
-            <span className={`db-dot ${dbStatus.mongodb_connected ? 'online' : 'fallback'}`}></span>
-            <span>
-              Database: {dbStatus.mongodb_connected ? 'MongoDB Active' : 'Local Fallback Active'}
-            </span>
-          </div>
-        )}
       </div>
     </div>
   );

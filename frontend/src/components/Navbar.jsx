@@ -18,15 +18,10 @@ export default function Navbar() {
           <span><span className="brand-accent">Satya</span>Sutra</span>
         </Link>
 
-        {dbStatus && (
-          <span
-            className={`navbar-db-badge ${dbStatus.mongodb_connected ? 'mongo-live' : 'local-live'}`}
-            title={dbStatus.mongodb_connected ? `MongoDB connected: ${dbStatus.database_name}` : 'Running on local file storage'}
-          >
-            <span className="db-indicator-dot"></span>
-            <span>{dbStatus.mongodb_connected ? 'MongoDB' : 'Local DB'}</span>
-          </span>
-        )}
+        <span className="navbar-db-badge local-live" title="SQLite Database Active">
+          <span className="db-indicator-dot"></span>
+          <span>SQLite Active</span>
+        </span>
       </div>
 
       <ul className="navbar-links">
@@ -106,11 +101,8 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="auth-button-group">
-            <Link to="/login" className="btn btn-ghost btn-nav-login">
-              Sign In
-            </Link>
-            <Link to="/register" className="btn btn-primary btn-nav-register">
-              Create Clearance →
+            <Link to="/login" className="btn btn-primary btn-nav-login">
+              Portal Sign In →
             </Link>
           </div>
         )}
