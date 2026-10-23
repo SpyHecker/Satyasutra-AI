@@ -1,1 +1,1026 @@
-[]
+[
+  {
+    "id": "1d9a9fef8359",
+    "filename": "01_police_fir_case_204.txt",
+    "file_path": "uploads\\01_police_fir_case_204_3.txt",
+    "upload_date": "2026-10-23T13:21:11.775244+00:00",
+    "file_type": "txt",
+    "raw_text": "FIRST INFORMATION REPORT (F.I.R.)\nUnder Section 154 Cr.P.C.\nPolice Station: Special Crime Branch, New Delhi\nFIR No: 204/2026\nDate and Time of FIR: October 22, 2026 at 02:30 AM\nInvestigating Officer: Inspector Alok Verma, Badge SCB-109\n\n1. DETAILS OF OCCURRENCE:\n   Date: October 21, 2026\n   Time: Approximately 11:30 PM\n   Place of Occurrence: Connaught Bank High-Security Vault, Barakhamba Road, New Delhi\n\n2. BRIEF FACTS OF COMPLAINT:\n   On October 21, 2026 at around 11:45 PM, an automated emergency seismic alarm was triggered in Vault Room B of Connaught Bank. Responding patrol team Unit-4 arrived at the facility at 11:58 PM.\n   Upon entry, Bank Vault Custodian Suresh Menon was discovered restrained and unconscious on the vault floor. Preliminary inspection confirmed that cryptographic security hardware and ₹4.5 Crore in bearer financial securities belonging to Apex Global Securities were stolen.\n   A PCR mobile patrol van stationed near Outer Ring Road reported that three suspects were spotted fleeing the rear service alley in a dark car with tinted windows heading east towards Noida.\n   The incident has been classified as high-priority corporate sabotage and grand larceny under Sections 380, 420, and 120-B of the Indian Penal Code.\n",
+    "entities": [
+      {
+        "text": "Section 154",
+        "label": "LAW",
+        "category": "Legal",
+        "start": 40,
+        "end": 51
+      },
+      {
+        "text": "P.C.\nPolice Station: Special Crime Branch",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 55,
+        "end": 96
+      },
+      {
+        "text": "New Delhi",
+        "label": "GPE",
+        "category": "Location",
+        "start": 98,
+        "end": 107
+      },
+      {
+        "text": "204/2026",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 116,
+        "end": 124
+      },
+      {
+        "text": "Time of FIR",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 134,
+        "end": 145
+      },
+      {
+        "text": "October 22, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 147,
+        "end": 163
+      },
+      {
+        "text": "02:30 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 167,
+        "end": 176
+      },
+      {
+        "text": "Alok Verma",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 209,
+        "end": 219
+      },
+      {
+        "text": "1",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 236,
+        "end": 237
+      },
+      {
+        "text": "October 21, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 271,
+        "end": 287
+      },
+      {
+        "text": "Time",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 291,
+        "end": 295
+      },
+      {
+        "text": "Approximately 11:30 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 297,
+        "end": 319
+      },
+      {
+        "text": "Barakhamba Road",
+        "label": "FAC",
+        "category": "Location",
+        "start": 380,
+        "end": 395
+      },
+      {
+        "text": "2",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 408,
+        "end": 409
+      },
+      {
+        "text": "around 11:45 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 463,
+        "end": 478
+      },
+      {
+        "text": "Vault Room B of",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 534,
+        "end": 549
+      },
+      {
+        "text": "Connaught Bank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 550,
+        "end": 564
+      },
+      {
+        "text": "Unit-4",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 589,
+        "end": 595
+      },
+      {
+        "text": "11:58 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 623,
+        "end": 631
+      },
+      {
+        "text": "Bank Vault Custodian Suresh Menon",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 648,
+        "end": 681
+      },
+      {
+        "text": "₹4.5 Crore",
+        "label": "MONEY",
+        "category": "Quantity",
+        "start": 818,
+        "end": 828
+      },
+      {
+        "text": "bearer financial securities",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 832,
+        "end": 859
+      },
+      {
+        "text": "Apex Global Securities",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 873,
+        "end": 895
+      },
+      {
+        "text": "PCR",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 914,
+        "end": 917
+      },
+      {
+        "text": "van",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 932,
+        "end": 935
+      },
+      {
+        "text": "Outer Ring Road",
+        "label": "FAC",
+        "category": "Location",
+        "start": 951,
+        "end": 966
+      },
+      {
+        "text": "three",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 981,
+        "end": 986
+      },
+      {
+        "text": "Noida",
+        "label": "GPE",
+        "category": "Location",
+        "start": 1095,
+        "end": 1100
+      },
+      {
+        "text": "Sections 380",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 1198,
+        "end": 1210
+      },
+      {
+        "text": "420",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 1212,
+        "end": 1215
+      },
+      {
+        "text": "120",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 1221,
+        "end": 1224
+      },
+      {
+        "text": "the Indian Penal Code",
+        "label": "LAW",
+        "category": "Legal",
+        "start": 1230,
+        "end": 1251
+      }
+    ],
+    "status": "processed",
+    "user_id": "admin-001",
+    "uploaded_by": "admin@satyasutra.ai"
+  },
+  {
+    "id": "caee50d8eb0f",
+    "filename": "02_witness_statement_security_guard.txt",
+    "file_path": "uploads\\02_witness_statement_security_guard_2.txt",
+    "upload_date": "2026-10-23T13:21:17.302601+00:00",
+    "file_type": "txt",
+    "raw_text": "WITNESS EXAMINATION & RECORDED TESTIMONY\nCriminal Case: Connaught Bank Vault Heist (FIR No: 204/2026)\nDate of Statement: October 22, 2026 at 09:00 AM\nWitness Name: Rameshwar Lal\nOccupation: Senior Security Supervisor, ShieldPro Security Services\nLocation of Examination: Special Crime Branch Headquarters, New Delhi\n\nSWORN TESTIMONY:\nI, Rameshwar Lal, state under oath:\nOn the night of October 21, 2026, I was assigned to the perimeter security desk at Gate 3 of Connaught Bank on Barakhamba Road. My duty shift commenced at 08:00 PM and was scheduled to conclude at 08:00 AM.\nAt approximately 11:15 PM, I performed the mandatory physical inspection of the loading docks adjacent to Vault Room B. The electronic mag-locks appeared secure.\nHowever, at approximately 11:45 PM, I was alerted by a sharp metallic impact from the rear service bay. I immediately proceeded towards the loading ramp with a flashlight.\nI saw two men wearing black tactical jumpsuits and balaclavas carrying aluminum payload cases. The suspects loaded the metal cases into a white van parked near Gate 3.\nThe driver of the vehicle gunned the engine and escaped at high speed towards Tolstoy Marg. The license plate was partially obscured by mud, but the white van bore commercial fleet markings.\nI immediately engaged the silent panic button to summon the central police dispatch.\n",
+    "entities": [
+      {
+        "text": "WITNESS EXAMINATION & RECORDED",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 0,
+        "end": 30
+      },
+      {
+        "text": "Criminal Case: Connaught Bank",
+        "label": "WORK_OF_ART",
+        "category": "Object",
+        "start": 41,
+        "end": 70
+      },
+      {
+        "text": "204/2026",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 92,
+        "end": 100
+      },
+      {
+        "text": "Date of Statement",
+        "label": "WORK_OF_ART",
+        "category": "Object",
+        "start": 102,
+        "end": 119
+      },
+      {
+        "text": "October 22, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 121,
+        "end": 137
+      },
+      {
+        "text": "09:00 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 141,
+        "end": 150
+      },
+      {
+        "text": "Rameshwar Lal\nOccupation",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 164,
+        "end": 188
+      },
+      {
+        "text": "ShieldPro Security Services\nLocation of Examination",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 218,
+        "end": 269
+      },
+      {
+        "text": "New Delhi",
+        "label": "GPE",
+        "category": "Location",
+        "start": 306,
+        "end": 315
+      },
+      {
+        "text": "Rameshwar Lal",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 337,
+        "end": 350
+      },
+      {
+        "text": "the night",
+        "label": "TIME",
+        "category": "Time",
+        "start": 373,
+        "end": 382
+      },
+      {
+        "text": "October 21, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 386,
+        "end": 402
+      },
+      {
+        "text": "Gate 3",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 453,
+        "end": 459
+      },
+      {
+        "text": "Connaught Bank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 463,
+        "end": 477
+      },
+      {
+        "text": "08:00 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 525,
+        "end": 533
+      },
+      {
+        "text": "08:00 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 567,
+        "end": 575
+      },
+      {
+        "text": "approximately 11:15 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 580,
+        "end": 602
+      },
+      {
+        "text": "Vault Room B.",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 683,
+        "end": 696
+      },
+      {
+        "text": "approximately 11:45 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 751,
+        "end": 773
+      },
+      {
+        "text": "two",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 917,
+        "end": 920
+      },
+      {
+        "text": "Gate 3",
+        "label": "LAW",
+        "category": "Legal",
+        "start": 1071,
+        "end": 1077
+      },
+      {
+        "text": "Tolstoy Marg",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 1157,
+        "end": 1169
+      }
+    ],
+    "status": "processed",
+    "user_id": "admin-001",
+    "uploaded_by": "admin@satyasutra.ai"
+  },
+  {
+    "id": "b2dc12cd3f30",
+    "filename": "03_cctv_log_barakhamba_corridor.txt",
+    "file_path": "uploads\\03_cctv_log_barakhamba_corridor_2.txt",
+    "upload_date": "2026-10-23T13:21:20.213624+00:00",
+    "file_type": "txt",
+    "raw_text": "METROPOLITAN SURVEILLANCE & ANPR LOG ANALYSIS\nDepartment of Video Analytics & Digital Forensics, Delhi Police\nCase Reference: FIR No. 204/2026\nDate of Compilation: October 22, 2026 at 01:15 PM\nLead Analyst: Sub-Inspector Tanvi Saxena\n\nSURVEILLANCE EVENT TIMELINE:\n1. October 21, 2026 at 10:45 PM [Camera #08 - Barakhamba Commercial Lane]:\n   A black sedan registration DL 03 CA 9412 arrives and halts 150 meters from Connaught Bank. Vehicle is registered to suspect Vikram Malhotra, Chief Systems Architect at Apex Global Securities.\n\n2. October 21, 2026 at 11:20 PM [Camera #14 - South Alley Perimeter]:\n   A lone individual matching physical dimensions of Vikram Malhotra approaches the biometric emergency fire door holding an encrypted NFC badge.\n\n3. October 21, 2026 at 11:45 PM [Camera #03 - Loading Bay Gate 3]:\n   A white van registration DL 01 TE 5521 backs into the cargo bay. Two men are recorded loading two containers into the white van while the individual inside the vault facility observes.\n\n4. October 22, 2026 at 12:30 AM [Toll ANPR #04 - DND Flyway Toll Plaza]:\n   Vehicle DL 03 CA 9412 registered to Vikram Malhotra recorded crossing lane 6 towards Noida Sector 62 at 112 km/h. Driver face positively matched with Vikram Malhotra database photo.\n",
+    "entities": [
+      {
+        "text": "METROPOLITAN SURVEILLANCE & ANPR LOG ANALYSIS\nDepartment of Video Analytics & Digital Forensics",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 0,
+        "end": 95
+      },
+      {
+        "text": "Delhi",
+        "label": "GPE",
+        "category": "Location",
+        "start": 97,
+        "end": 102
+      },
+      {
+        "text": "204/2026",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 134,
+        "end": 142
+      },
+      {
+        "text": "October 22, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 164,
+        "end": 180
+      },
+      {
+        "text": "01:15 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 184,
+        "end": 192
+      },
+      {
+        "text": "Tanvi Saxena",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 221,
+        "end": 233
+      },
+      {
+        "text": "1",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 264,
+        "end": 265
+      },
+      {
+        "text": "October 21, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 267,
+        "end": 283
+      },
+      {
+        "text": "10:45 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 287,
+        "end": 295
+      },
+      {
+        "text": "03",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 372,
+        "end": 374
+      },
+      {
+        "text": "9412",
+        "label": "DATE",
+        "category": "Time",
+        "start": 378,
+        "end": 382
+      },
+      {
+        "text": "halts 150 meters",
+        "label": "QUANTITY",
+        "category": "Quantity",
+        "start": 395,
+        "end": 411
+      },
+      {
+        "text": "Connaught Bank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 417,
+        "end": 431
+      },
+      {
+        "text": "Vehicle",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 433,
+        "end": 440
+      },
+      {
+        "text": "Vikram Malhotra",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 466,
+        "end": 481
+      },
+      {
+        "text": "2",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 535,
+        "end": 536
+      },
+      {
+        "text": "11:20 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 558,
+        "end": 566
+      },
+      {
+        "text": "Vikram",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 658,
+        "end": 664
+      },
+      {
+        "text": "NFC",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 740,
+        "end": 743
+      },
+      {
+        "text": "3",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 752,
+        "end": 753
+      },
+      {
+        "text": "11:45 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 775,
+        "end": 783
+      },
+      {
+        "text": "Two",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 887,
+        "end": 890
+      },
+      {
+        "text": "the white van",
+        "label": "FAC",
+        "category": "Location",
+        "start": 936,
+        "end": 949
+      },
+      {
+        "text": "4",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 1008,
+        "end": 1009
+      },
+      {
+        "text": "12:30 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 1031,
+        "end": 1039
+      },
+      {
+        "text": "Vehicle DL 03",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 1084,
+        "end": 1097
+      },
+      {
+        "text": "CA 9412",
+        "label": "DATE",
+        "category": "Time",
+        "start": 1098,
+        "end": 1105
+      },
+      {
+        "text": "6",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 1159,
+        "end": 1160
+      },
+      {
+        "text": "Noida",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 1169,
+        "end": 1174
+      },
+      {
+        "text": "112 km/h. Driver",
+        "label": "QUANTITY",
+        "category": "Quantity",
+        "start": 1188,
+        "end": 1204
+      }
+    ],
+    "status": "processed",
+    "user_id": "admin-001",
+    "uploaded_by": "admin@satyasutra.ai"
+  },
+  {
+    "id": "e56600d64c16",
+    "filename": "04_suspect_interrogation_vikram_malhotra.txt",
+    "file_path": "uploads\\04_suspect_interrogation_vikram_malhotra_2.txt",
+    "upload_date": "2026-10-23T13:21:23.002252+00:00",
+    "file_type": "txt",
+    "raw_text": "SPECIAL CRIME INVESTIGATION WING — ACCUSED INTERROGATION TRANSCRIPT\nSubject: Vikram Malhotra\nDesignation: Chief Systems Architect, Apex Global Securities\nDate of Interrogation: October 22, 2026 at 04:00 PM\nInterrogating Officer: ACP Neha Kashyap\nLocation: Interrogation Room 3, Crime Branch, Chanakyapuri\n\nTRANSCRIPT:\nQ: ACP Neha Kashyap: Where were you on the night of October 21, 2026 between 09:00 PM and midnight?\nA: Vikram Malhotra: I was completely detached from any work or bank operations. I had dinner with my associate Priya Desai at Hotel Oberoi on Dr. Zakir Hussain Marg in New Delhi. I arrived at the restaurant around 09:00 PM and stayed having drinks and discussing private equity investments until approximately 11:45 PM.\n\nQ: ACP Kashyap: Did you visit Connaught Bank or Barakhamba Road at any point that night?\nA: Vikram Malhotra: Absolutely not. I never stepped foot near Barakhamba Road or Connaught Bank that entire night. My car, a dark car, was left with the hotel valet parking throughout the entire duration.\n\nQ: ACP Kashyap: What time did you reach your residence in Vasant Kunj?\nA: Vikram Malhotra: I drove directly home from Hotel Oberoi. I reached my home in Vasant Kunj at approximately 12:15 AM and remained there until police arrived the following morning.\n",
+    "entities": [
+      {
+        "text": "Vikram Malhotra",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 77,
+        "end": 92
+      },
+      {
+        "text": "October 22, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 177,
+        "end": 193
+      },
+      {
+        "text": "04:00 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 197,
+        "end": 205
+      },
+      {
+        "text": "ACP Neha Kashyap\nLocation: Interrogation Room",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 229,
+        "end": 274
+      },
+      {
+        "text": "3",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 275,
+        "end": 276
+      },
+      {
+        "text": "Crime Branch",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 278,
+        "end": 290
+      },
+      {
+        "text": "Chanakyapuri",
+        "label": "GPE",
+        "category": "Location",
+        "start": 292,
+        "end": 304
+      },
+      {
+        "text": "ACP Neha Kashyap",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 321,
+        "end": 337
+      },
+      {
+        "text": "the night",
+        "label": "TIME",
+        "category": "Time",
+        "start": 357,
+        "end": 366
+      },
+      {
+        "text": "October 21, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 370,
+        "end": 386
+      },
+      {
+        "text": "between 09:00 PM and midnight",
+        "label": "TIME",
+        "category": "Time",
+        "start": 387,
+        "end": 416
+      },
+      {
+        "text": "Priya Desai",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 529,
+        "end": 540
+      },
+      {
+        "text": "Hotel Oberoi",
+        "label": "FAC",
+        "category": "Location",
+        "start": 544,
+        "end": 556
+      },
+      {
+        "text": "Zakir Hussain Marg",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 564,
+        "end": 582
+      },
+      {
+        "text": "New Delhi",
+        "label": "GPE",
+        "category": "Location",
+        "start": 586,
+        "end": 595
+      },
+      {
+        "text": "09:00 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 632,
+        "end": 640
+      },
+      {
+        "text": "approximately 11:45 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 714,
+        "end": 736
+      },
+      {
+        "text": "ACP Kashyap",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 742,
+        "end": 753
+      },
+      {
+        "text": "Connaught Bank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 769,
+        "end": 783
+      },
+      {
+        "text": "Barakhamba Road",
+        "label": "FAC",
+        "category": "Location",
+        "start": 890,
+        "end": 905
+      },
+      {
+        "text": "Vasant Kunj",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 1092,
+        "end": 1103
+      },
+      {
+        "text": "approximately 12:15 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 1202,
+        "end": 1224
+      },
+      {
+        "text": "the following morning",
+        "label": "TIME",
+        "category": "Time",
+        "start": 1265,
+        "end": 1286
+      }
+    ],
+    "status": "processed",
+    "user_id": "admin-001",
+    "uploaded_by": "admin@satyasutra.ai"
+  },
+  {
+    "id": "50ac22bee98e",
+    "filename": "05_cyber_forensic_server_audit.pdf",
+    "file_path": "uploads\\05_cyber_forensic_server_audit_2.pdf",
+    "upload_date": "2026-10-23T13:21:25.938698+00:00",
+    "file_type": "pdf",
+    "raw_text": "CENTRAL CYBER FORENSICS LABORATORY (CCFL)\nDIGITAL EVIDENCE EXTRACTION & SERVER AUDIT REPORT\nReport ID: CCFL-DEL-2026-8812\nSubject: Connaught Bank Core Infrastructure Intrusion\nTarget Vault: Vault Room B Cryptographic HSM\nDate of Examination: October 22, 2026 at 06:00 PM\nChief Examiner: Dr. Ananya Sen, Principal Forensic Specialist\nEXECUTIVE SUMMARY:\nOn October 21, 2026 at 11:40 PM, the multi-factor authentication lock guarding Vault Room B was\ncompromised.\nThe intruder authenticated directly from the local physical maintenance console located inside Connaught\nBank.\nCRITICAL DIGITAL ARTIFACTS:\n1. Authentication Token: Account credentials belonging to Vikram Malhotra (Employee ID: VM-8821) were\nutilized to authorize the vault door override.\n2. Cryptographic Key Transfer: At 11:42 PM, master decryption keys for Apex Global Securities bearer\nassets were copied onto an unencrypted SanDisk USB drive.\n3. Access Point: The physical terminal located 5 meters outside Vault Room B was accessed with\nbiometric fingerprint validation of Vikram Malhotra.\n4. Telecommunication Tower Dump: Cell phone number +91-98110-44219 assigned to Vikram Malhotra\nwas registered pinging the Barakhamba Road cellular cell tower from 10:50 PM on October 21, 2026 until\n12:05 AM on October 22, 2026, completely disproving his presence at Hotel Oberoi during the robbery.\nCONCLUSION:\nThe digital evidence incontrovertibly establishes that Vikram Malhotra was physically present inside\nConnaught Bank on October 21, 2026 during the vault penetration.",
+    "entities": [
+      {
+        "text": "CENTRAL CYBER FORENSICS LABORATORY",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 0,
+        "end": 34
+      },
+      {
+        "text": "CCFL",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 36,
+        "end": 40
+      },
+      {
+        "text": "DIGITAL EVIDENCE EXTRACTION & SERVER",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 42,
+        "end": 78
+      },
+      {
+        "text": "CCFL-DEL-2026-8812",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 103,
+        "end": 121
+      },
+      {
+        "text": "Connaught Bank Core Infrastructure Intrusion\nTarget Vault",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 131,
+        "end": 188
+      },
+      {
+        "text": "Vault Room B Cryptographic HSM\nDate of Examination",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 190,
+        "end": 240
+      },
+      {
+        "text": "October 22, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 242,
+        "end": 258
+      },
+      {
+        "text": "06:00 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 262,
+        "end": 270
+      },
+      {
+        "text": "Ananya Sen",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 291,
+        "end": 301
+      },
+      {
+        "text": "Principal Forensic Specialist",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 303,
+        "end": 332
+      },
+      {
+        "text": "October 21, 2026",
+        "label": "DATE",
+        "category": "Time",
+        "start": 355,
+        "end": 371
+      },
+      {
+        "text": "11:40 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 375,
+        "end": 383
+      },
+      {
+        "text": "Vault Room B",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 431,
+        "end": 443
+      },
+      {
+        "text": "Connaught\nBank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 556,
+        "end": 570
+      },
+      {
+        "text": "1",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 600,
+        "end": 601
+      },
+      {
+        "text": "Vikram Malhotra",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 658,
+        "end": 673
+      },
+      {
+        "text": "2",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 749,
+        "end": 750
+      },
+      {
+        "text": "Cryptographic Key Transfer",
+        "label": "PERSON",
+        "category": "Person",
+        "start": 752,
+        "end": 778
+      },
+      {
+        "text": "11:42 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 783,
+        "end": 791
+      },
+      {
+        "text": "Apex Global Securities",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 820,
+        "end": 842
+      },
+      {
+        "text": "SanDisk USB",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 889,
+        "end": 900
+      },
+      {
+        "text": "3",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 908,
+        "end": 909
+      },
+      {
+        "text": "5 meters",
+        "label": "QUANTITY",
+        "category": "Quantity",
+        "start": 955,
+        "end": 963
+      },
+      {
+        "text": "4",
+        "label": "CARDINAL",
+        "category": "Quantity",
+        "start": 1056,
+        "end": 1057
+      },
+      {
+        "text": "Telecommunication Tower Dump",
+        "label": "FAC",
+        "category": "Location",
+        "start": 1059,
+        "end": 1087
+      },
+      {
+        "text": "98110-44219",
+        "label": "DATE",
+        "category": "Time",
+        "start": 1111,
+        "end": 1122
+      },
+      {
+        "text": "10:50 PM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 1219,
+        "end": 1227
+      },
+      {
+        "text": "12:05 AM",
+        "label": "TIME",
+        "category": "Time",
+        "start": 1254,
+        "end": 1262
+      },
+      {
+        "text": "Hotel Oberoi",
+        "label": "FAC",
+        "category": "Location",
+        "start": 1322,
+        "end": 1334
+      },
+      {
+        "text": "Connaught Bank",
+        "label": "ORG",
+        "category": "Organization",
+        "start": 1468,
+        "end": 1482
+      }
+    ],
+    "status": "processed",
+    "user_id": "admin-001",
+    "uploaded_by": "admin@satyasutra.ai"
+  }
+]
