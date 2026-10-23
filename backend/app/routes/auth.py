@@ -21,7 +21,9 @@ from app.services.auth_service import (
     TokenOut,
     UserRecord,
 )
-from app.db.mongodb import is_mongodb_ready, get_mongodb_db_name
+# --- MongoDB code commented out per instruction (using SQLite for login) ---
+# from app.db.mongodb import is_mongodb_ready, get_mongodb_db_name
+from app.db.sqlite import get_db_path
 
 logger = logging.getLogger(__name__)
 
@@ -167,13 +169,14 @@ async def get_my_profile(current_user: UserRecord = Depends(get_current_user)):
 
 @router.get("/status")
 async def get_auth_and_db_status():
-    """Return status of authentication provider and MongoDB database connection."""
-    mongo_ready = is_mongodb_ready()
+    """Return status of authentication provider and SQLite database connection."""
+    # --- MongoDB code commented out per instruction (using SQLite for login) ---
+    # mongo_ready = is_mongodb_ready()
     return {
         "auth_enabled": True,
         "database": {
-            "type": "mongodb" if mongo_ready else "local_fallback",
-            "mongodb_connected": mongo_ready,
-            "database_name": get_mongodb_db_name() if mongo_ready else "data/json_store",
+            "type": "sqlite",
+            "sqlite_connected": True,
+            "database_name": str(get_db_path()),
         },
     }

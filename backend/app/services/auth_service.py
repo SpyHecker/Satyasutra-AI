@@ -19,9 +19,16 @@ import bcrypt
 import jwt
 from pydantic import BaseModel, EmailStr, Field
 
-from app.db.mongodb import (
-    is_mongodb_ready,
-    get_users_collection,
+# --- MongoDB code commented out per instruction (using SQLite for login) ---
+# from app.db.mongodb import (
+#     is_mongodb_ready,
+#     get_users_collection,
+# )
+from app.db.sqlite import (
+    init_sqlite_db,
+    save_user_sqlite,
+    get_user_by_email_sqlite,
+    get_user_by_id_sqlite,
 )
 
 logger = logging.getLogger(__name__)
@@ -123,19 +130,21 @@ def decode_access_token(token: str) -> Optional[dict]:
 
 
 # ---------------------------------------------------------------------------
-# User Store (MongoDB primary + JSON fallback)
+# User Store (SQLite primary + JSON backup)
 # ---------------------------------------------------------------------------
 class UserStore:
-    """Store for managing user accounts in MongoDB or local JSON fallback."""
+    """Store for managing user accounts in SQLite with JSON backup."""
 
     def __init__(self, store_path: str = "data/users_store.json"):
         self._path = Path(store_path)
         self._lock = Lock()
+        init_sqlite_db()
         self._ensure_file()
+        self._sync_local_to_sqlite()
         self._ensure_admin_user()
 
     def _ensure_file(self):
-        """Ensure storage directory and local fallback file exist."""
+        """Ensure storage directory and local backup file exist."""
         self._path.parent.mkdir(parents=True, exist_ok=True)
         if not self._path.exists():
             self._path.write_text("[]", encoding="utf-8")
@@ -154,6 +163,16 @@ class UserStore:
             json.dumps(records, indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
+
+    def _sync_local_to_sqlite(self):
+        """Seed SQLite with existing local JSON accounts if SQLite is fresh."""
+        try:
+            records = self._read_local()
+            for r in records:
+                if not get_user_by_email_sqlite(r.get("email", "")):
+                    save_user_sqlite(r)
+        except Exception as exc:
+            logger.warning(f"Could not sync JSON to SQLite: {exc}")
 
     def _ensure_admin_user(self):
         """Ensure a single legitimate administrator account exists."""
@@ -178,10 +197,10 @@ class UserStore:
                 hashed_password=hash_password(admin_password),
             )
             self._save_record(admin_user)
-            logger.info(f"Initialized legit administrator account: {admin_email}")
+            logger.info(f"Initialized legit administrator account in SQLite: {admin_email}")
 
     def _save_record(self, record: UserRecord):
-        """Persist user record to local file and MongoDB."""
+        """Persist user record to SQLite and JSON backup."""
         doc = record.model_dump()
         with self._lock:
             records = self._read_local()
@@ -189,13 +208,20 @@ class UserStore:
             records.append(doc)
             self._write_local(records)
 
-        if is_mongodb_ready():
-            try:
-                col = get_users_collection()
-                if col is not None:
-                    col.replace_one({"email": record.email.lower()}, doc, upsert=True)
-            except Exception as exc:
-                logger.warning(f"Could not persist user to MongoDB: {exc}")
+        # Persist to SQLite
+        try:
+            save_user_sqlite(doc)
+        except Exception as exc:
+            logger.warning(f"Could not persist user to SQLite: {exc}")
+
+        # --- MongoDB code commented out per instruction (using SQLite for login) ---
+        # if is_mongodb_ready():
+        #     try:
+        #         col = get_users_collection()
+        #         if col is not None:
+        #             col.replace_one({"email": record.email.lower()}, doc, upsert=True)
+        #     except Exception as exc:
+        #         logger.warning(f"Could not persist user to MongoDB: {exc}")
 
     def create_user(
         self,
@@ -222,20 +248,29 @@ class UserStore:
         return record
 
     def get_by_email(self, email: str) -> Optional[UserRecord]:
-        """Look up user by email address."""
+        """Look up user by email address from SQLite."""
         email_clean = email.strip().lower()
 
-        if is_mongodb_ready():
-            try:
-                col = get_users_collection()
-                if col is not None:
-                    doc = col.find_one({"email": email_clean}, {"_id": 0})
-                    if doc:
-                        return UserRecord(**doc)
-            except Exception as exc:
-                logger.warning(f"MongoDB user lookup error: {exc}")
+        # Check SQLite first
+        try:
+            row = get_user_by_email_sqlite(email_clean)
+            if row:
+                return UserRecord(**row)
+        except Exception as exc:
+            logger.warning(f"SQLite user lookup error: {exc}")
 
-        # Local fallback
+        # --- MongoDB code commented out per instruction (using SQLite for login) ---
+        # if is_mongodb_ready():
+        #     try:
+        #         col = get_users_collection()
+        #         if col is not None:
+        #             doc = col.find_one({"email": email_clean}, {"_id": 0})
+        #             if doc:
+        #                 return UserRecord(**doc)
+        #     except Exception as exc:
+        #         logger.warning(f"MongoDB user lookup error: {exc}")
+
+        # Local JSON fallback
         with self._lock:
             records = self._read_local()
         for r in records:
@@ -244,16 +279,25 @@ class UserStore:
         return None
 
     def get_by_id(self, user_id: str) -> Optional[UserRecord]:
-        """Look up user by ID."""
-        if is_mongodb_ready():
-            try:
-                col = get_users_collection()
-                if col is not None:
-                    doc = col.find_one({"id": user_id}, {"_id": 0})
-                    if doc:
-                        return UserRecord(**doc)
-            except Exception as exc:
-                logger.warning(f"MongoDB user id lookup error: {exc}")
+        """Look up user by ID from SQLite."""
+        # Check SQLite first
+        try:
+            row = get_user_by_id_sqlite(user_id)
+            if row:
+                return UserRecord(**row)
+        except Exception as exc:
+            logger.warning(f"SQLite user id lookup error: {exc}")
+
+        # --- MongoDB code commented out per instruction (using SQLite for login) ---
+        # if is_mongodb_ready():
+        #     try:
+        #         col = get_users_collection()
+        #         if col is not None:
+        #             doc = col.find_one({"id": user_id}, {"_id": 0})
+        #             if doc:
+        #                 return UserRecord(**doc)
+        #     except Exception as exc:
+        #         logger.warning(f"MongoDB user id lookup error: {exc}")
 
         with self._lock:
             records = self._read_local()

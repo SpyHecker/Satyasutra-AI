@@ -17,12 +17,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.evidence import router as evidence_router
 from app.routes.auth import router as auth_router
-from app.db.mongodb import (
-    connect_to_mongodb,
-    close_mongodb_connection,
-    is_mongodb_ready,
-    get_mongodb_db_name,
-)
+from app.db.sqlite import init_sqlite_db, get_db_path
+
+# --- MongoDB code commented out per instruction (using SQLite for login) ---
+# from app.db.mongodb import (
+#     connect_to_mongodb,
+#     close_mongodb_connection,
+#     is_mongodb_ready,
+#     get_mongodb_db_name,
+# )
 
 load_dotenv()
 
@@ -47,16 +50,21 @@ async def lifespan(app: FastAPI):
         d.mkdir(parents=True, exist_ok=True)
         logger.info(f"Ensured directory: {d.resolve()}")
 
-    # Initialize MongoDB connection if configured
-    mongo_ok = connect_to_mongodb()
-    if mongo_ok:
-        logger.info(f"Active database backend: MongoDB ({get_mongodb_db_name()})")
-    else:
-        logger.info("Active database backend: Local JSON Store (ready for MongoDB connection)")
+    # Initialize SQLite database for authentication
+    init_sqlite_db()
+    logger.info(f"Active authentication database: SQLite ({get_db_path()})")
+
+    # --- MongoDB connection commented out per instruction (using SQLite for login) ---
+    # mongo_ok = connect_to_mongodb()
+    # if mongo_ok:
+    #     logger.info(f"Active database backend: MongoDB ({get_mongodb_db_name()})")
+    # else:
+    #     logger.info("Active database backend: Local JSON Store (ready for MongoDB connection)")
 
     yield
 
-    close_mongodb_connection()
+    # --- MongoDB shutdown commented out per instruction ---
+    # close_mongodb_connection()
     logger.info("Shutting down SatyaSutra API")
 
 
@@ -99,15 +107,16 @@ app.include_router(evidence_router, prefix="/api/evidence", tags=["Evidence"])
 @app.get("/api/health", tags=["System"])
 async def health_check():
     """Liveness & database readiness probe."""
-    mongo_ready = is_mongodb_ready()
+    # --- MongoDB check commented out per instruction (using SQLite for login) ---
+    # mongo_ready = is_mongodb_ready()
     return {
         "status": "ok",
         "service": "SatyaSutra AI Forensic API",
         "version": "0.2.0",
         "database": {
-            "type": "mongodb" if mongo_ready else "local_fallback",
-            "mongodb_connected": mongo_ready,
-            "database_name": get_mongodb_db_name() if mongo_ready else "local_json",
+            "type": "sqlite",
+            "connected": True,
+            "database_file": str(get_db_path()),
         },
     }
 
