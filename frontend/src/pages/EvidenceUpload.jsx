@@ -204,7 +204,7 @@ export default function EvidenceUpload() {
       )}
 
       {/* Evidence List */}
-      {evidenceList.length > 0 && (
+      {evidenceList.length > 0 ? (
         <div style={{ marginTop: 'var(--sp-8)' }} className="anim-fade-up delay-2">
           <h2 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--sp-4)' }}>
             📂 Uploaded Evidence ({evidenceList.length})
@@ -245,6 +245,17 @@ export default function EvidenceUpload() {
             ))}
           </div>
         </div>
+      ) : (
+        !uploading && (
+          <div className="empty-evidence-prompt anim-fade-up delay-2">
+            <div className="empty-prompt-icon">📂</div>
+            <h3>No Evidence Files Ingested Yet</h3>
+            <p>
+              Your investigator workspace is currently blank. Drag and drop case documents,
+              FIRs, PDFs, or CCTV stills into the upload zone above to begin automated extraction.
+            </p>
+          </div>
+        )
       )}
 
       {/* Evidence Detail Modal */}

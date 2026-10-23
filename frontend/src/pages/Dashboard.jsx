@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import api from '../api/client';
+import { useAuth } from '../context/useAuth';
 
 const features = [
   {
@@ -48,6 +49,7 @@ const features = [
 ];
 
 export default function Dashboard() {
+  const { user } = useAuth();
   const [stats, setStats] = useState(null);
   const [backendOnline, setBackendOnline] = useState(null);
 
@@ -65,50 +67,53 @@ export default function Dashboard() {
 
   const liveStats = [
     {
-      value: stats?.evidence_count ?? '—',
-      label: 'Evidence',
+      value: stats?.evidence_count ?? 0,
+      label: 'Evidence Files',
       color: stats?.evidence_count > 0 ? 'var(--accent-light)' : 'var(--text-muted)',
     },
     {
-      value: stats?.total_entities ?? '—',
-      label: 'Entities',
+      value: stats?.total_entities ?? 0,
+      label: 'Extracted Entities',
       color: stats?.total_entities > 0 ? 'var(--success)' : 'var(--text-muted)',
     },
     {
-      value: stats?.contradiction_count ?? '—',
+      value: stats?.contradiction_count ?? 0,
       label: 'Contradictions',
       color: stats?.contradiction_count > 0 ? 'var(--danger)' : 'var(--text-muted)',
     },
     {
-      value: backendOnline === true ? '●' : backendOnline === false ? '○' : '…',
-      label: 'Backend',
+      value: backendOnline === true ? '● Online' : backendOnline === false ? '○ Offline' : '…',
+      label: 'System Status',
       color: backendOnline ? 'var(--success)' : 'var(--danger)',
     },
   ];
+
+  const isBlankCase = stats && stats.evidence_count === 0;
 
   return (
     <div className="anim-fade">
       {/* Hero */}
       <section className="hero" id="dashboard-hero">
         <div className="hero-badge anim-fade-up">
-          🚀 AI-Powered Investigation
+          🛡️ Case Clearance Level: {user?.role || 'Lead Investigator'}
         </div>
 
         <h1 className="anim-fade-up delay-1">
-          Connect the <span className="accent">Evidence</span>
+          Welcome, <span className="accent">{user?.full_name || 'Investigator'}</span>
         </h1>
 
         <p className="hero-desc anim-fade-up delay-2">
-          Turn fragmented documents, images, and statements into one auditable case view —
-          knowledge graph, timeline, and source-cited report.
+          {isBlankCase
+            ? 'Your personal case vault is ready and waiting for initial evidence intake.'
+            : 'Active multi-source investigation workspace with linked graph, timeline, and audit-ready reporting.'}
         </p>
 
         <div className="hero-actions anim-fade-up delay-3">
           <Link to="/evidence" className="btn btn-primary">
-            📁 Upload Evidence
+            📁 Ingest Evidence
           </Link>
           <Link to="/graph" className="btn btn-ghost">
-            🔗 View Graph
+            🕸️ View Graph
           </Link>
         </div>
 
@@ -123,12 +128,33 @@ export default function Dashboard() {
         </div>
       </section>
 
+      {/* Blank Workspace Welcome Card for New Users */}
+      {isBlankCase && (
+        <section className="blank-workspace-card anim-fade-up delay-4">
+          <div className="blank-card-glow"></div>
+          <div className="blank-card-icon">🗂️</div>
+          <div className="blank-card-body">
+            <h3>Fresh Case Workspace Initialized</h3>
+            <p>
+              All evidence vaults, entity graphs, and timeline sequences are blank for your new account.
+              Begin by uploading police FIRs, witness testimonies, or CCTV stills to start automatic OCR
+              and entity linkage.
+            </p>
+            <div className="blank-card-actions">
+              <Link to="/evidence" className="btn btn-primary">
+                Upload Your First Evidence Document →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Feature Grid */}
       <section id="features-section" style={{ marginTop: 'var(--sp-12)' }}>
         <h2 style={{ textAlign: 'center', marginBottom: 'var(--sp-8)', fontSize: 'var(--text-2xl)' }}
             className="anim-fade-up delay-4"
         >
-          Core Capabilities
+          Forensic Investigation Modules
         </h2>
         <div className="grid grid-3">
           {features.map((f, i) => (

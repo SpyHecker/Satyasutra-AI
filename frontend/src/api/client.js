@@ -1,14 +1,27 @@
 /**
  * API Client — centralized fetch wrapper for the SatyaSutra backend.
+ * Automatically injects JWT Bearer tokens and handles auth & evidence endpoints.
  */
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 async function request(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`;
+
+  // Build headers with optional auth token
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  const token = localStorage.getItem('satyasutra_token');
+  if (token && !headers['Authorization']) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const config = {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
     ...options,
+    headers,
   };
 
   // Remove Content-Type for FormData (file uploads)
@@ -28,6 +41,19 @@ async function request(endpoint, options = {}) {
 
 export const api = {
   health: () => request('/health'),
+
+  auth: {
+    login: (credentials) => request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    }),
+    register: (userData) => request('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    }),
+    me: () => request('/auth/me'),
+    status: () => request('/auth/status'),
+  },
 
   evidence: {
     upload: (file) => {

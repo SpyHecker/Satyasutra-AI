@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import ForceGraph2D from 'react-force-graph-2d';
 import api from '../api/client';
 
@@ -256,29 +257,43 @@ export default function GraphView() {
         </div>
       )}
 
-      {/* Graph Canvas */}
+      {/* Graph Canvas or Empty State */}
       <div className="graph-container" ref={containerRef}>
-        <ForceGraph2D
-          ref={graphRef}
-          graphData={filtered}
-          width={dimensions.width}
-          height={dimensions.height}
-          backgroundColor="#06080f"
-          nodeCanvasObject={nodeCanvasObject}
-          linkCanvasObjectMode={() => 'replace'}
-          linkCanvasObject={linkCanvasObject}
-          onNodeClick={handleNodeClick}
-          nodePointerAreaPaint={(node, color, ctx) => {
-            const r = node.val || 4;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI);
-            ctx.fillStyle = color;
-            ctx.fill();
-          }}
-          cooldownTicks={80}
-          d3AlphaDecay={0.02}
-          d3VelocityDecay={0.3}
-        />
+        {filtered.nodes.length === 0 ? (
+          <div className="empty-graph-state">
+            <div className="empty-state-icon">🕸️</div>
+            <h2>No Case Entities Ingested Yet</h2>
+            <p>
+              Your case knowledge graph is blank. Upload documents or statements in the Evidence Ingestion
+              tab to automatically identify Persons, Locations, Organizations, and Objects.
+            </p>
+            <Link to="/evidence" className="btn btn-primary" style={{ marginTop: 'var(--sp-4)' }}>
+              📁 Ingest Evidence Documents →
+            </Link>
+          </div>
+        ) : (
+          <ForceGraph2D
+            ref={graphRef}
+            graphData={filtered}
+            width={dimensions.width}
+            height={dimensions.height}
+            backgroundColor="#06080f"
+            nodeCanvasObject={nodeCanvasObject}
+            linkCanvasObjectMode={() => 'replace'}
+            linkCanvasObject={linkCanvasObject}
+            onNodeClick={handleNodeClick}
+            nodePointerAreaPaint={(node, color, ctx) => {
+              const r = node.val || 4;
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI);
+              ctx.fillStyle = color;
+              ctx.fill();
+            }}
+            cooldownTicks={80}
+            d3AlphaDecay={0.02}
+            d3VelocityDecay={0.3}
+          />
+        )}
       </div>
 
       {/* Selected Node Detail */}
