@@ -31,6 +31,7 @@
 | Timeline Reconstruction — chronological ordering + automatic gap detection | MVP |
 | Contradiction Detection — flags conflicting facts across sources | MVP |
 | Evidence-Traceable Report Generator — draft report with inline citations | MVP |
+| SatyaSutra AI Assistant Chatbot — Floating bottom-right Q&A assistant trained over entire platform knowledge base | Complete |
 | Case Q&A Chatbot — RAG over the case graph | Stretch |
 | CCTV/video analytics, facial recognition, witness intake, scenario simulation, RBAC, multilingual OCR | Future scope |
 

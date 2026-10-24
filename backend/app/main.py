@@ -17,6 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.evidence import router as evidence_router
 from app.routes.auth import router as auth_router
+from app.routes.chatbot import router as chatbot_router
 from app.db.sqlite import init_sqlite_db, get_db_path
 
 # --- MongoDB code commented out per instruction (using SQLite for login) ---
@@ -99,6 +100,7 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(evidence_router, prefix="/api/evidence", tags=["Evidence"])
+app.include_router(chatbot_router, prefix="/api/chatbot", tags=["AI Assistant"])
 
 
 # ---------------------------------------------------------------------------

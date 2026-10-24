@@ -2,7 +2,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
 export default function Navbar() {
-  const { isAuthenticated, user, logout, dbStatus } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = () => {

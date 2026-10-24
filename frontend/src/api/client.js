@@ -73,6 +73,14 @@ export const api = {
     report: () => request('/evidence/analysis/report'),
     stats: () => request('/evidence/analysis/stats'),
   },
+
+  chatbot: {
+    ask: (message, history = []) => request('/chatbot/ask', {
+      method: 'POST',
+      body: JSON.stringify({ message, history }),
+    }),
+    suggestions: () => request('/chatbot/suggestions'),
+  },
 };
 
 export default api;
