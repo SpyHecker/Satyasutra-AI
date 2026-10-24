@@ -2,25 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import api from '../api/client';
-import { queryClientKnowledge, PUBLIC_SUGGESTIONS } from '../utils/chatbotKnowledge';
+import { queryClientKnowledge } from '../utils/chatbotKnowledge';
 
 const INITIAL_GREETING = {
   id: 'msg-welcome',
   sender: 'bot',
-  text: `👋 **Welcome to the SatyaSutra Public Assistant!**
-
-I can answer general operational questions based on our **public landing page**:
-
-- 🌟 **What is SatyaSutra?**
-- 🔄 **The 4-Stage Intelligence Pipeline**
-- 🛡️ **Core Capabilities** (Ingestion, NLP, Knowledge Graph, Timeline Gaps, Contradictions)
-- ⚖️ **Ethical Guardrails & Policies** (Zero Guilt Scores)
-- 👥 **Public Target Use Cases** & Creators
-
-*(Note: For security and investigative confidentiality, login credentials, internal technical architecture, and active detective case operations are strictly protected and cannot be disclosed).*`,
+  text: `👋 **Hi! How can I help you today?**\n\nAsk me anything about SatyaSutra's platform, pipeline, or capabilities.`,
   timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-  sources: ['SatyaSutra Landing Page'],
-  suggestedFollowups: PUBLIC_SUGGESTIONS.slice(0, 4),
 };
 
 export default function Chatbot() {
@@ -92,12 +80,9 @@ export default function Chatbot() {
         response = await api.chatbot.ask(query, historyPayload);
       } catch (backendErr) {
         console.warn('Backend chatbot API unavailable, utilizing client knowledge fallback:', backendErr);
-        // Instant client-side trained model fallback
         const clientRes = queryClientKnowledge(query);
         response = {
           answer: clientRes.answer,
-          sources: clientRes.sources,
-          suggested_followups: clientRes.suggestedFollowups,
         };
       }
 
@@ -106,8 +91,6 @@ export default function Chatbot() {
         sender: 'bot',
         text: response.answer || "I found information on SatyaSutra. Let me know if you need more details!",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        sources: response.sources || ['SatyaSutra Knowledge Base'],
-        suggestedFollowups: response.suggested_followups || response.suggestedFollowups || [],
       };
 
       setMessages((prev) => [...prev, botMessage]);
@@ -116,10 +99,8 @@ export default function Chatbot() {
       const errorMessage = {
         id: `err-${Date.now()}`,
         sender: 'bot',
-        text: `⚠️ **Apologies, an error occurred while searching knowledge:** ${err.message || 'Unknown issue'}. Please try asking about evidence upload, the knowledge graph, timeline, or login.`,
+        text: `⚠️ **Unable to complete request:** ${err.message || 'Please try again later.'}`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        sources: ['System Alert'],
-        suggestedFollowups: ['What is SatyaSutra?', 'How to upload evidence?'],
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -151,23 +132,30 @@ export default function Chatbot() {
 
   return (
     <div className="chatbot-root" id="satyasutra-chatbot-widget">
-      {/* Floating Action Button / Launcher */}
+      {/* Floating Action Launcher Button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className={`chatbot-launcher-btn ${isOpen ? 'active' : ''}`}
         aria-label="Toggle SatyaSutra AI Assistant"
-        title="Ask SatyaSutra AI Assistant"
+        title="Chat with SatyaSutra Assistant"
         id="chatbot-toggle-button"
       >
-        <div className="launcher-glow-ring"></div>
         {isOpen ? (
           <span className="launcher-icon close-icon">✕</span>
         ) : (
-          <div className="launcher-icon-wrapper">
-            <span className="launcher-bot-icon">🤖</span>
-            <span className="launcher-pulse-dot"></span>
-            <span className="launcher-badge">AI</span>
-          </div>
+          <svg
+            className="launcher-chat-svg"
+            width="21"
+            height="21"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
         )}
       </button>
 
@@ -179,14 +167,13 @@ export default function Chatbot() {
             <div className="chatbot-header-identity">
               <div className="chatbot-avatar">
                 <span>⚖️</span>
-                <span className="chatbot-status-dot online"></span>
               </div>
               <div className="chatbot-title-info">
-                <div className="chatbot-main-title">
-                  <span>SatyaSutra AI</span>
-                  <span className="chatbot-version-pill">Public Guide</span>
+                <div className="chatbot-main-title">SatyaSutra AI</div>
+                <div className="chatbot-status-row">
+                  <span className="chatbot-status-dot online"></span>
+                  <span className="chatbot-subtitle">Assistant</span>
                 </div>
-                <div className="chatbot-subtitle">Landing Page Information • Secure Assistant</div>
               </div>
             </div>
 
@@ -194,7 +181,7 @@ export default function Chatbot() {
               <button
                 onClick={handleClearChat}
                 className="chatbot-icon-btn"
-                title="Clear conversation history"
+                title="Clear chat"
                 aria-label="Clear chat"
               >
                 🔄
@@ -202,7 +189,7 @@ export default function Chatbot() {
               <button
                 onClick={() => setIsOpen(false)}
                 className="chatbot-icon-btn close-btn"
-                title="Minimize assistant"
+                title="Close chat"
                 aria-label="Close chat"
               >
                 ✕
@@ -210,49 +197,28 @@ export default function Chatbot() {
             </div>
           </div>
 
-          {/* Quick Info Bar */}
-          <div className="chatbot-quick-bar">
-            <span>🛡️ Public Information Guide • Confidential Records Protected</span>
-          </div>
-
-          {/* Conversation Stream */}
+          {/* Conversation Messages */}
           <div className="chatbot-messages-container" id="chatbot-messages">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`chat-bubble-wrapper ${msg.sender === 'user' ? 'user-wrapper' : 'bot-wrapper'}`}
               >
-                {msg.sender === 'bot' && (
-                  <div className="bubble-avatar">
-                    <span>🔍</span>
-                  </div>
-                )}
-
                 <div className={`chat-bubble ${msg.sender === 'user' ? 'user-bubble' : 'bot-bubble'}`}>
                   <div className="bubble-content markdown-body">
                     <ReactMarkdown
                       components={{
                         a: ({ href, children, ...props }) => {
-                          if (href && href.startsWith('/')) {
-                            return (
-                              <a
-                                href={href}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(href);
-                                }}
-                                className="chatbot-inline-nav-link"
-                                {...props}
-                              >
-                                {children} ↗
-                              </a>
-                            );
-                          }
+                          const isInternal = href && href.startsWith('/');
                           return (
                             <a
                               href={href}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                              onClick={isInternal ? (e) => {
+                                e.preventDefault();
+                                navigate(href);
+                              } : undefined}
+                              target={isInternal ? undefined : '_blank'}
+                              rel={isInternal ? undefined : 'noopener noreferrer'}
                               className="chatbot-inline-nav-link"
                               {...props}
                             >
@@ -266,49 +232,18 @@ export default function Chatbot() {
                     </ReactMarkdown>
                   </div>
 
-                  {/* Metadata & Actions */}
                   <div className="bubble-meta">
                     <span className="bubble-timestamp">{msg.timestamp}</span>
-                    {msg.sender === 'bot' && msg.id !== 'msg-welcome' && (
+                    {msg.sender === 'bot' && (
                       <button
                         onClick={() => handleCopy(msg.id, msg.text)}
                         className="bubble-copy-btn"
-                        title="Copy answer"
+                        title="Copy text"
                       >
-                        {copiedId === msg.id ? '✓ Copied' : '📋 Copy'}
+                        {copiedId === msg.id ? '✓ Copied' : 'Copy'}
                       </button>
                     )}
                   </div>
-
-                  {/* Sources Tag */}
-                  {msg.sources && msg.sources.length > 0 && msg.sender === 'bot' && (
-                    <div className="bubble-sources">
-                      <span className="sources-label">Sources:</span>
-                      {msg.sources.map((src, i) => (
-                        <span key={i} className="source-tag">
-                          {src}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Dynamic Follow-up Suggestions on Bot Bubble */}
-                  {msg.suggestedFollowups && msg.suggestedFollowups.length > 0 && msg.sender === 'bot' && (
-                    <div className="bubble-followups">
-                      <div className="followup-title">💡 Related inquiries:</div>
-                      <div className="followup-chips">
-                        {msg.suggestedFollowups.map((suggestion, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => handleSendMessage(suggestion)}
-                            className="followup-chip-btn"
-                          >
-                            {suggestion}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
@@ -316,40 +251,19 @@ export default function Chatbot() {
             {/* Thinking / Typing Indicator */}
             {isThinking && (
               <div className="chat-bubble-wrapper bot-wrapper anim-fade">
-                <div className="bubble-avatar">
-                  <span>🧠</span>
-                </div>
                 <div className="chat-bubble bot-bubble thinking-bubble">
                   <div className="thinking-dots">
                     <span className="dot dot-1"></span>
                     <span className="dot dot-2"></span>
                     <span className="dot dot-3"></span>
                   </div>
-                  <span className="thinking-text">SatyaSutra Model is synthesizing answer...</span>
+                  <span className="thinking-text">Thinking...</span>
                 </div>
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
-
-          {/* Preset Prompts Drawer (when conversation is fresh) */}
-          {messages.length === 1 && (
-            <div className="chatbot-starter-prompts">
-              <span className="starter-title">Public Inquiries:</span>
-              <div className="starter-chips-grid">
-                {PUBLIC_SUGGESTIONS.map((q, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleSendMessage(q)}
-                    className="starter-chip"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Input Area */}
           <div className="chatbot-input-area">
@@ -359,7 +273,7 @@ export default function Chatbot() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about the landing page, pipeline, or capabilities..."
+                placeholder="Ask a question..."
                 rows={1}
                 className="chatbot-input"
                 id="chatbot-text-input"
@@ -368,13 +282,13 @@ export default function Chatbot() {
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim() || isThinking}
                 className="chatbot-send-btn"
-                title="Send message (Enter)"
-                aria-label="Send query"
+                title="Send"
+                aria-label="Send message"
                 id="chatbot-send-button"
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="15"
+                  height="15"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -386,9 +300,6 @@ export default function Chatbot() {
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
               </button>
-            </div>
-            <div className="input-footer-hint">
-              <span>Press <strong>Enter</strong> to send • <strong>Shift+Enter</strong> for newline</span>
             </div>
           </div>
         </div>
